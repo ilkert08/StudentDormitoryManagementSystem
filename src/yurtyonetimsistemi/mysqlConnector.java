@@ -24,5 +24,4 @@ public class mysqlConnector {
         }
         return con;
     }
-
 }
