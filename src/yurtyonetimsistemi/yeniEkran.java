@@ -106,7 +106,7 @@ public class yeniEkran extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         ogrenciKayit ok = new ogrenciKayit();
-        ok.setLocation(350,350);
+        ok.setLocation(350, 350);
         ok.setResizable(false);
         ok.setVisible(true);
         ok.setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -115,7 +115,7 @@ public class yeniEkran extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         ogrenciSorgusu os = new ogrenciSorgusu();
-        os.setLocation(350,350);
+        os.setLocation(350, 350);
         os.setResizable(false);
         os.setVisible(true);
         os.setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -124,7 +124,7 @@ public class yeniEkran extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         ogrenciSil os = new ogrenciSil();
-        os.setLocation(350,350);
+        os.setLocation(350, 350);
         os.setResizable(false);
         os.setVisible(true);
         os.setDefaultCloseOperation(HIDE_ON_CLOSE);

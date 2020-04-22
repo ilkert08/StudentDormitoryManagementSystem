@@ -1,15 +1,7 @@
 package yurtyonetimsistemi;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import com.mysql.jdbc.Driver;
-import java.awt.GraphicsEnvironment;
-import javafx.geometry.Pos;
-import javax.swing.GroupLayout;
-import javax.tools.DocumentationTool;
+
 
 public class YurtYonetimSistemi {
 

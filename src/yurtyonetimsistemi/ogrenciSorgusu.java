@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -65,6 +66,39 @@ public class ogrenciSorgusu extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
@@ -97,6 +131,11 @@ public class ogrenciSorgusu extends javax.swing.JFrame {
         });
 
         jButton2.setText("SORGULA");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         header.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         header.setForeground(new java.awt.Color(100, 100, 100));
@@ -168,22 +207,20 @@ public class ogrenciSorgusu extends javax.swing.JFrame {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(String.format("SELECT * from ogrenci where tcNo = %s", tcNo.getText()));
             Object[] dataArr = null;
-            int count = 0;
-            while (rs.next()) {               
+
+            while (rs.next()) {
                 //System.out.println(rs.getString(1) + "  " + rs.getString(2)+"  " +rs.getString(3));
                 dataArr = new Object[]{rs.getString(1), rs.getString(2), rs.getString(3),
-                     rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
-                     rs.getString(9), rs.getString(10)};
-                System.out.println("DENEME");
+                    rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
+                    rs.getString(9), rs.getString(11)};
+
             }
 
             table.setModel(new javax.swing.table.DefaultTableModel(
                     new Object[][]{
-                        {dataArr[0],dataArr[1],dataArr[2],dataArr[3],dataArr[4],dataArr[5],dataArr[6]
-                        ,dataArr[7],dataArr[8],dataArr[9]},
-                    },
+                        {dataArr[1], dataArr[2], dataArr[4], dataArr[3], dataArr[6], dataArr[8], dataArr[7], dataArr[9]},},
                     new String[]{
-                        "Öğrenci Adı", "Öğrenci Soyadı", "T.C", "Okul Bilgisi", "Bölüm Bilgisi", "Telefon Numaras", "İzin Durumu", "Yurt Ücreti", "Hastalık Durumu"
+                        "Öğrenci Adı", "Öğrenci Soyadı", "T.C", "Okul Bilgisi", "Bölüm Bilgisi", "Telefon Numarası", "Hastalık Durumu", "Oda No"
                     }
             ) {
                 Class[] types = new Class[]{
@@ -208,6 +245,70 @@ public class ogrenciSorgusu extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        DefaultTableModel model;
+
+        mysqlConnector msql = new mysqlConnector();
+        Connection con = msql.connectorSender();
+        try {
+            Statement stmt = con.createStatement();
+            String sorgulanacakOda = jTextField2.getText();
+            ResultSet rs = stmt.executeQuery(String.format("select * from ogrenci o, odalar o2 where o.odano = o2.idodalar and o2.idodalar = '%s'", sorgulanacakOda));
+            Object[][] dataArr = null;
+
+            ArrayList<Object[]> dataList = new ArrayList<>();
+            while (rs.next()) {
+                //System.out.println(rs.getString(1) + "  " + rs.getString(2)+"  " +rs.getString(3));                
+                Object[] objArr = new Object[]{rs.getString(1), rs.getString(2), rs.getString(3),
+                    rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
+                    rs.getString(9), rs.getString(11)};
+                dataList.add(objArr);
+            }
+
+            dataArr = new Object[dataList.size()][];
+            for (int i = 0; i < dataList.size(); i++) {
+                dataArr[i] = dataList.get(i);
+
+            }
+
+            /*   new Object[][]{
+                        {dataArr[1], dataArr[2], dataArr[4], dataArr[3], dataArr[6], dataArr[8], dataArr[7], dataArr[9]},                
+                    
+                    },*/
+            model = new javax.swing.table.DefaultTableModel(
+                    dataArr,
+                    new String[]{
+                        "Öğrenci Adı", "Öğrenci Soyadı", "T.C", "Okul Bilgisi", "Bölüm Bilgisi", "Telefon Numarası", "Hastalık Durumu", "Oda No"
+                    }
+            ) {
+                Class[] types = new Class[]{
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                };
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false, false, false, false, false
+                };
+
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            };
+
+            table.setModel(model);
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -1,13 +1,14 @@
 package yurtyonetimsistemi;
 
+import java.sql.ResultSet;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.util.GregorianCalendar;
 
 public class ogrenciKayit extends javax.swing.JFrame {
 
-    
     public ogrenciKayit() {
         initComponents();
         warningText.setVisible(false);
@@ -191,28 +192,62 @@ public class ogrenciKayit extends javax.swing.JFrame {
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         mysqlConnector msql = new mysqlConnector();
         Connection con = msql.connectorSender();
-            
-        
+
         // INSERT INTO
-            try{
-            Statement stmt=con.createStatement(); 
-            String sorgu=String.format("insert into ogrenci(ad,soyad,tcno,okul,bolum,sinif, adres, telefon, hastalikDurumu  ) values('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
-                    name.getText(), surname.getText(), tcNo.getText(),okulBilgisi.getText(),
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * from odalar");
+            Object[] dataArr2;
+            String odaNo = "null";
+            String doluluk = "null";
+            while (rs.next()) {
+                //System.out.println(rs.getString(1) + "  " + rs.getString(2)+"  " +rs.getString(3));
+                dataArr2 = new Object[]{rs.getString(1), rs.getString(2), rs.getString(3)};
+                if (dataArr2[2].equals("4")) {
+                    if (Integer.parseInt((String) dataArr2[1]) < 4) {
+                        odaNo = (String) dataArr2[0];
+                        doluluk = (String) dataArr2[1];
+                        break;
+                    }
+                } else if (dataArr2[2].equals("3")) {
+                    if (Integer.parseInt((String) dataArr2[1]) < 4) {
+                        odaNo = (String) dataArr2[0];
+                        doluluk = (String) dataArr2[1];
+                        break;
+                    }
+                }
+            }
+            doluluk = "" + (Integer.parseInt(doluluk) + 1);
+
+            try {
+                String sorgu = String.format("Update odalar  set doluluk = '%s' where idodalar='%d'", doluluk, Integer.parseInt(odaNo));
+                stmt.executeUpdate(sorgu);
+                System.out.println("Kayıt Update Edildi!");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+            GregorianCalendar gc = new GregorianCalendar();
+            java.util.Date date = gc.getTime();
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+
+            System.out.println(date);
+
+            String sorgu = String.format("insert into ogrenci(ad,soyad,tcno,okul,bolum,sinif, adres, telefon, hastalikDurumu,odano, kayittarihi ) values('%s','%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s')",
+                    name.getText(), surname.getText(), tcNo.getText(), okulBilgisi.getText(),
                     bolumBilgisi.getText(), sinifBilgisi.getText(), adresBilgisi.getText(),
-                    telefonNo.getText(), hastalikBilgisi.getText(), adresBilgisi.getText()
-                    );
-            int ekleme = stmt.executeUpdate(sorgu);
+                    telefonNo.getText(), hastalikBilgisi.getText(), odaNo, sqlDate.toString());
+            stmt.executeUpdate(sorgu);
+
             System.out.println("Kayıt Eklendi");
             warningText.setVisible(true);  //Uyari yazisi gorunur hale gelir.
-        }catch(SQLException e){ System.out.println(e);
-         warningText.setVisible(true); //Eklenememe hatasi}
+        } catch (SQLException e) {
+            System.out.println(e);
+            warningText.setVisible(true); //Eklenememe hatasi}
         }
-         //INSERT INTO
-        
-        
-        
-        
-        
+        //INSERT INTO
+
+
     }//GEN-LAST:event_addButtonActionPerformed
 
     /**
