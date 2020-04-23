@@ -12,15 +12,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author ilkertinkir
- */
+
 public class ogrenciSorgusu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ogrenciSorgusu
-     */
     public ogrenciSorgusu() {
         initComponents();
     }
@@ -43,6 +37,8 @@ public class ogrenciSorgusu extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         header = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,61 +59,54 @@ public class ogrenciSorgusu extends javax.swing.JFrame {
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Öğrenci Adı", "Öğrenci Soyadı", "T.C", "Okul Bilgisi", "Bölüm Bilgisi", "Telefon Numaras", "İzin Durumu", "Yurt Ücreti", "Hastalık Durumu"
+                "Öğrenci Adı", "Öğrenci Soyadı", "T.C", "Okul Bilgisi", "Bölüm Bilgisi", "Telefon Numaras", "Hastalık Durumu", "Sınıf", "Oda No", "Adres"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(table);
@@ -142,6 +131,20 @@ public class ogrenciSorgusu extends javax.swing.JFrame {
         header.setText("Öğrenci Sorgula");
         header.setToolTipText("");
 
+        jButton3.setText("TÜM ÖĞRENCİLERİ LİSTELE");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("SİLİNEN ÖĞRENCİLERİ LİSTELE");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -149,20 +152,27 @@ public class ogrenciSorgusu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton1)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(tcNo, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addGap(63, 63, 63)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jButton2))
-                    .addComponent(header)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 976, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButton1)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tcNo, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addGap(63, 63, 63)
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButton2))
+                            .addComponent(header)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton4)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,9 +191,13 @@ public class ogrenciSorgusu extends javax.swing.JFrame {
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         pack();
@@ -200,7 +214,6 @@ public class ogrenciSorgusu extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         DefaultTableModel model = new DefaultTableModel();
-
         mysqlConnector msql = new mysqlConnector();
         Connection con = msql.connectorSender();
         try {
@@ -208,32 +221,42 @@ public class ogrenciSorgusu extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery(String.format("SELECT * from ogrenci where tcNo = %s", tcNo.getText()));
             Object[] dataArr = null;
 
-            while (rs.next()) {
-                //System.out.println(rs.getString(1) + "  " + rs.getString(2)+"  " +rs.getString(3));
+            while (rs.next()) {         
+                             
                 dataArr = new Object[]{rs.getString(1), rs.getString(2), rs.getString(3),
                     rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
-                    rs.getString(9), rs.getString(11)};
+                    rs.getString(9), rs.getString(10), rs.getString(11)};
+                /*
+                id:1, ad:2 , soyad:3, okul:4, tc:5, adres:6,
+                bölüm:7, hastalik:8, telefon:9, sınıf:10, odano:11
+                */
+                
 
             }
-
             table.setModel(new javax.swing.table.DefaultTableModel(
                     new Object[][]{
-                        {dataArr[1], dataArr[2], dataArr[4], dataArr[3], dataArr[6], dataArr[8], dataArr[7], dataArr[9]},},
+                        {dataArr[1], dataArr[2], dataArr[4], dataArr[3], dataArr[6], dataArr[8], dataArr[7], dataArr[9], dataArr[10], dataArr[5]}
+                    },
                     new String[]{
-                        "Öğrenci Adı", "Öğrenci Soyadı", "T.C", "Okul Bilgisi", "Bölüm Bilgisi", "Telefon Numarası", "Hastalık Durumu", "Oda No"
+                        "Öğrenci Adı", "Öğrenci Soyadı", "T.C", "Okul Bilgisi", "Bölüm Bilgisi", "Telefon Numarası", "Hastalık Durumu", "Sınıf", "Oda No","Adres"
                     }
             ) {
                 Class[] types = new Class[]{
-                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                    java.lang.String.class
                 };
                 boolean[] canEdit = new boolean[]{
-                    false, false, false, false, false, false, false, false, false
+                    true,true,true,true,true,true,true,true,true,true
                 };
 
+                @Override
                 public Class getColumnClass(int columnIndex) {
                     return types[columnIndex];
                 }
 
+                @Override
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
                     return canEdit[columnIndex];
                 }
@@ -261,34 +284,42 @@ public class ogrenciSorgusu extends javax.swing.JFrame {
             ArrayList<Object[]> dataList = new ArrayList<>();
             while (rs.next()) {
                 //System.out.println(rs.getString(1) + "  " + rs.getString(2)+"  " +rs.getString(3));                
-                Object[] objArr = new Object[]{rs.getString(1), rs.getString(2), rs.getString(3),
-                    rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
-                    rs.getString(9), rs.getString(11)};
+                Object[] objArr = {rs.getString(2), rs.getString(3), rs.getString(5),
+                    rs.getString(4), rs.getString(7), rs.getString(9), rs.getString(8), rs.getString(10),
+                    rs.getString(11), rs.getString(6)} ;
                 dataList.add(objArr);
             }
-
+            
+                            /*
+                id:1, ad:2 , soyad:3, okul:4, tc:5, adres:6,
+                bölüm:7, hastalik:8, telefon:9, sınıf:10, odano:11
+                */
+                
+            
             dataArr = new Object[dataList.size()][];
             for (int i = 0; i < dataList.size(); i++) {
                 dataArr[i] = dataList.get(i);
-
+                System.out.println(dataArr[i][0]);
             }
 
-            /*   new Object[][]{
-                        {dataArr[1], dataArr[2], dataArr[4], dataArr[3], dataArr[6], dataArr[8], dataArr[7], dataArr[9]},                
-                    
-                    },*/
+
             model = new javax.swing.table.DefaultTableModel(
                     dataArr,
                     new String[]{
-                        "Öğrenci Adı", "Öğrenci Soyadı", "T.C", "Okul Bilgisi", "Bölüm Bilgisi", "Telefon Numarası", "Hastalık Durumu", "Oda No"
+                         "Öğrenci Adı", "Öğrenci Soyadı", "T.C", "Okul Bilgisi", "Bölüm Bilgisi", "Telefon Numarası", "Hastalık Durumu", "Sınıf", "Oda No","Adres"
                     }
             ) {
+                
                 Class[] types = new Class[]{
-                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                    java.lang.String.class
                 };
                 boolean[] canEdit = new boolean[]{
-                    false, false, false, false, false, false, false, false, false
+                    true,true,true,true,true,true,true,true,true,true
                 };
+                
 
                 @Override
                 public Class getColumnClass(int columnIndex) {
@@ -309,6 +340,154 @@ public class ogrenciSorgusu extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        DefaultTableModel model;
+
+        mysqlConnector msql = new mysqlConnector();
+        Connection con = msql.connectorSender();
+        try {
+            Statement stmt = con.createStatement();
+            String sorgulanacakOda = jTextField2.getText();
+            ResultSet rs = stmt.executeQuery(String.format("select * from ogrenci"));
+            Object[][] dataArr = null;
+            ArrayList<Object[]> dataList = new ArrayList<>();
+            while (rs.next()) {
+                //System.out.println(rs.getString(1) + "  " + rs.getString(2)+"  " +rs.getString(3));                
+                Object[] objArr = {rs.getString(2), rs.getString(3), rs.getString(5),
+                    rs.getString(4), rs.getString(7), rs.getString(9), rs.getString(8), rs.getString(10),
+                    rs.getString(11), rs.getString(6),rs.getString(12)} ;
+                dataList.add(objArr);
+            }
+            
+                            /*
+                id:1, ad:2 , soyad:3, okul:4, tc:5, adres:6,
+                bölüm:7, hastalik:8, telefon:9, sınıf:10, odano:11
+                */
+                
+            
+            dataArr = new Object[dataList.size()][];
+            for (int i = 0; i < dataList.size(); i++) {
+                dataArr[i] = dataList.get(i);
+                System.out.println(dataArr[i][0]);
+            }
+
+
+            model = new javax.swing.table.DefaultTableModel(
+                    dataArr,
+                    new String[]{
+                         "Öğrenci Adı", "Öğrenci Soyadı", "T.C", "Okul Bilgisi", "Bölüm Bilgisi", "Telefon Numarası", "Hastalık Durumu", "Sınıf", "Oda No","Adres","Kayıt Tarihi"
+                    }
+            ) {
+                
+                Class[] types = new Class[]{
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                    java.lang.String.class,java.lang.String.class
+                };
+                boolean[] canEdit = new boolean[]{
+                    true,true,true,true,true,true,true,true,true,true,true
+                };
+                
+
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            };
+
+            table.setModel(model);
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model;
+
+        mysqlConnector msql = new mysqlConnector();
+        Connection con = msql.connectorSender();
+        try {
+            Statement stmt = con.createStatement();
+            String sorgulanacakOda = jTextField2.getText();
+            ResultSet rs = stmt.executeQuery(String.format("select * from silinenogrenciler")) ;
+            Object[][] dataArr = null;
+
+            ArrayList<Object[]> dataList = new ArrayList<>();
+            while (rs.next()) {
+                //System.out.println(rs.getString(1) + "  " + rs.getString(2)+"  " +rs.getString(3));                
+                Object[] objArr = {rs.getString(2), rs.getString(3), rs.getString(5),
+                    rs.getString(4), rs.getString(7), rs.getString(9), rs.getString(8), rs.getString(10),
+                    rs.getString(11), rs.getString(6),rs.getString(12),rs.getString(13)} ;
+                dataList.add(objArr);
+            }
+            
+                            /*
+                id:1, ad:2 , soyad:3, okul:4, tc:5, adres:6,
+                bölüm:7, hastalik:8, telefon:9, sınıf:10, odano:11
+                */
+                
+            
+            dataArr = new Object[dataList.size()][];
+            for (int i = 0; i < dataList.size(); i++) {
+                dataArr[i] = dataList.get(i);
+                System.out.println(dataArr[i][0]);
+            }
+
+
+            model = new javax.swing.table.DefaultTableModel(
+                    dataArr,
+                    new String[]{
+                         "Öğrenci Adı", "Öğrenci Soyadı", "T.C", "Okul Bilgisi", "Bölüm Bilgisi", "Telefon Numarası", "Hastalık Durumu", "Sınıf", "Oda No","Adres","Kayıt Tarihi","Silinme Tarihi"
+                    }
+            ) {
+                
+                Class[] types = new Class[]{
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                    java.lang.String.class, java.lang.String.class,java.lang.String.class 
+                };
+                boolean[] canEdit = new boolean[]{
+                    true,true,true,true,true,true,true,true,true,true,true,true
+                };
+                
+
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            };
+
+            table.setModel(model);
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -349,6 +528,8 @@ public class ogrenciSorgusu extends javax.swing.JFrame {
     private javax.swing.JLabel header;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

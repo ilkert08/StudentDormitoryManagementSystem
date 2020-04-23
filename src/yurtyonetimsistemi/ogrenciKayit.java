@@ -196,6 +196,12 @@ public class ogrenciKayit extends javax.swing.JFrame {
         // INSERT INTO
         try {
             Statement stmt = con.createStatement();
+            ResultSet rs2 = stmt.executeQuery(String.format("SELECT * from ogrenci where tcno = '%s'", tcNo.getText()));
+            int counter = 0;
+            while(rs2.next())
+                counter++;
+            
+            if(counter == 0){
             ResultSet rs = stmt.executeQuery("SELECT * from odalar");
             Object[] dataArr2;
             String odaNo = "null";
@@ -240,9 +246,18 @@ public class ogrenciKayit extends javax.swing.JFrame {
             stmt.executeUpdate(sorgu);
 
             System.out.println("Kayıt Eklendi");
+            warningText.setText("Öğrenci başarıyla kaydedildi.");
             warningText.setVisible(true);  //Uyari yazisi gorunur hale gelir.
+            }
+            else{
+                warningText.setText("Bu öğrenci zaten kayıtlı!");
+                warningText.setVisible(true);
+            }
+            
+            
         } catch (SQLException e) {
             System.out.println(e);
+            warningText.setText("Hata oluştu.");
             warningText.setVisible(true); //Eklenememe hatasi}
         }
         //INSERT INTO

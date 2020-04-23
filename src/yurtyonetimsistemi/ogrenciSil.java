@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -41,6 +42,7 @@ public class ogrenciSil extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         header = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,7 +123,8 @@ public class ogrenciSil extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(header)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -137,10 +140,12 @@ public class ogrenciSil extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
                 .addGap(13, 13, 13)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(70, 70, 70))
         );
 
         pack();
@@ -155,17 +160,77 @@ public class ogrenciSil extends javax.swing.JFrame {
             mysqlConnector msql = new mysqlConnector();
             Connection con = msql.connectorSender();
             String del = tcNo.getText();
-            //UPDATE  
+            String odaNo = "null";
+            String doluluk = "null";
             try {
                 Statement stmt = con.createStatement();
-                String sorgu = String.format("delete from ogrenci where tcno = '%s'", del);
-                int ekleme = stmt.executeUpdate(sorgu);
+                String sorgu1 = String.format("SELECT * from ogrenci where tcNo = %s", del);
+                ResultSet rs = stmt.executeQuery(sorgu1);
+                Object[] dataArr = null;
+                while (rs.next()) {
+
+                    dataArr = new Object[]{rs.getString(1), rs.getString(2), rs.getString(3),
+                        rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
+                        rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12)};
+                    /*
+                id:1, ad:2 , soyad:3, okul:4, tc:5, adres:6,
+                bölüm:7, hastalik:8, telefon:9, sınıf:10, odano:11
+                     */
+                    odaNo = rs.getString(11);
+                }
+                /*
+                (ad,soyad,tcno,okul,bolum,sinif, adres, telefon, hastalikDurumu,odano, kayittarihi )
+                 */
+
+                GregorianCalendar gc = new GregorianCalendar();
+                java.util.Date date = gc.getTime();
+                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+
+                String sorgu3 = String.format("insert into silinenogrenciler(ad, soyad, okul, tcNo, adres, bolum, hastalikDurumu, telefon, sinif, odano, kayitTarihi, silinmeTarihi) values('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s','%s','%s','%s')",
+                        dataArr[1], dataArr[2], dataArr[3], dataArr[4], dataArr[5], dataArr[6], dataArr[7], dataArr[8],
+                        dataArr[9], dataArr[10], dataArr[11], sqlDate);
+                stmt.executeUpdate(sorgu3);
+
+                stmt = con.createStatement();
+                rs = stmt.executeQuery(String.format("SELECT * from odalar oda where oda.idodalar = '%s'", odaNo));               
+                while (rs.next()) {
+                    if (Integer.parseInt(odaNo) > 0) {
+                        doluluk = rs.getString(2);
+                        doluluk = "" + (Integer.parseInt(doluluk) - 1);
+                    }
+
+                }
+
+                try {
+                    String sorgu5 = String.format("Update odalar  set doluluk = '%s' where idodalar='%d'", doluluk, Integer.parseInt(odaNo));
+                    stmt.executeUpdate(sorgu5);
+                    System.out.println("Kayıt Update Edildi!");
+                } catch (Exception e) {
+                    System.out.println("Silinemedi2");
+                }
+
+                String sorgu2 = String.format("delete from ogrenci where tcno = '%s'", del);
+                stmt.executeUpdate(sorgu2);
                 System.out.println("Kayıt Silindi");
+                
+                jLabel2.setText("Kayıt başarıyla silindi!");
+                
             } catch (Exception e) {
-                System.out.println(e);
+               
                 System.out.println("Silinmedi!");
+                jLabel2.setText("Kayıt Silinemedi, hata!");
             }
-            ///UPDATE  
+
+            /*
+                        try{
+            Statement stmt = con.createStatement();
+            String sorgu = String.format("insert into ogrenci(ad,soyad,tcno,okul,bolum,sinif, adres, telefon, hastalikDurumu,odano, kayittarihi ) values('%s','%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s')",
+                    name.getText(), surname.getText(), tcNo.getText(), okulBilgisi.getText(),
+                    bolumBilgisi.getText(), sinifBilgisi.getText(), adresBilgisi.getText(),
+                    telefonNo.getText(), hastalikBilgisi.getText(), odaNo, sqlDate.toString());
+            stmt.executeUpdate(sorgu);
+            }
+             */
         } else {
             remove(dialogButton);
         }
@@ -174,8 +239,6 @@ public class ogrenciSil extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel model = new DefaultTableModel();
 
         mysqlConnector msql = new mysqlConnector();
         Connection con = msql.connectorSender();
@@ -183,34 +246,42 @@ public class ogrenciSil extends javax.swing.JFrame {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(String.format("SELECT * from ogrenci where tcNo = %s", tcNo.getText()));
             Object[] dataArr = null;
-            int count = 0;
+
             while (rs.next()) {
-                //System.out.println(rs.getString(1) + "  " + rs.getString(2)+"  " +rs.getString(3));
+
                 dataArr = new Object[]{rs.getString(1), rs.getString(2), rs.getString(3),
                     rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
-                    rs.getString(9), rs.getString(10)};
-                System.out.println("DENEME");
-            }
+                    rs.getString(9), rs.getString(10), rs.getString(11)};
+                /*
+                id:1, ad:2 , soyad:3, okul:4, tc:5, adres:6,
+                bölüm:7, hastalik:8, telefon:9, sınıf:10, odano:11
+                 */
 
+            }
             table.setModel(new javax.swing.table.DefaultTableModel(
                     new Object[][]{
-                        {dataArr[0], dataArr[1], dataArr[2], dataArr[3], dataArr[4], dataArr[5], dataArr[6],
-                            dataArr[7], dataArr[8], dataArr[9]},},
+                        {dataArr[1], dataArr[2], dataArr[4], dataArr[3], dataArr[6], dataArr[8], dataArr[7], dataArr[9], dataArr[10], dataArr[5]}
+                    },
                     new String[]{
-                        "Öğrenci Adı", "Öğrenci Soyadı", "T.C", "Okul Bilgisi", "Bölüm Bilgisi", "Telefon Numaras", "İzin Durumu", "Yurt Ücreti", "Hastalık Durumu"
+                        "Öğrenci Adı", "Öğrenci Soyadı", "T.C", "Okul Bilgisi", "Bölüm Bilgisi", "Telefon Numarası", "Hastalık Durumu", "Sınıf", "Oda No", "Adres"
                     }
             ) {
                 Class[] types = new Class[]{
-                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                    java.lang.String.class
                 };
                 boolean[] canEdit = new boolean[]{
-                    false, false, false, false, false, false, false, false, false
+                    true, true, true, true, true, true, true, true, true, true
                 };
 
+                @Override
                 public Class getColumnClass(int columnIndex) {
                     return types[columnIndex];
                 }
 
+                @Override
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
                     return canEdit[columnIndex];
                 }
@@ -266,6 +337,7 @@ public class ogrenciSil extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table;
     private javax.swing.JTextField tcNo;
